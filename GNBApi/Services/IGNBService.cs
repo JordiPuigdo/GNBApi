@@ -9,5 +9,9 @@ namespace GNBApi.Services
     public interface IGNBService
     {
         Task<List<Transaction>> GetAllTransactions(string name);
+
+        Task<List<Rate>> GetAllRates(string name);
+
+        Task<List<Transaction>> GetSKUTransactions(string name, string SKU);
     }
 }

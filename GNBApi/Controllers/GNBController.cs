@@ -13,37 +13,29 @@ namespace GNBApi.Controllers
     {
 
         private readonly IGNBService _ignbservice;
-
-        private List<Transaction> _transactions = new List<Transaction>();
-
         public GNBController(IGNBService ignbservice)
         {
             _ignbservice = ignbservice;
         }
 
 
-        //public IActionResult Get() => Ok(_ignbservice.GetAllTransactions("a"));
-        [HttpGet("GetTransactionsAsync")]
+        [HttpGet("GetTransactions")]
         public async Task<List<Transaction>> GetAllTransactionsSKU()
         {
-            return await _ignbservice.GetAllTransactions("a");
+            return await _ignbservice.GetAllTransactions("GetSKU");
         }
 
-        //private async Task<List<GithubInfo>> GetPRsPerUser()
-        //{
-        //    List<PullRequest> pullRequests = new List<PullRequest>();
+        [HttpGet("GetRates")]
+        public async Task<List<Rate>> GetAllRates()
+        {
+            return await _ignbservice.GetAllRates("GetRates");
+        }
 
-        //    _repositories = await _githubService.GetRepositories(EvaluatorLink);
-        //    var exercises = _repositories.Where(x => x.Name.Contains("Ejer")).ToList();
-        //    foreach (var exer in exercises)
-        //    {
-        //        pullRequests.AddRange(await _githubService.GetPullRequests(EvaluatorLink, exer.Name));
-        //    }
-
-        //    return pullRequests.GroupBy(x => x.User.Login)
-        //        .Select(x => new GithubInfo() { User = x.Key, PullRequests = x.ToList() }).ToList();
-        //}
-
+        [HttpGet("GetSKUTransactions")]
+        public async Task<List<Transaction>> GetSKUTransactions([FromQuery] string SKU)
+        {
+            return await _ignbservice.GetSKUTransactions("GetSKU", SKU);
+        }
 
     }
 }
